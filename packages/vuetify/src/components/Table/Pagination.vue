@@ -1,26 +1,43 @@
 <template>
-  <div class="d-flex align-center justify-center">
-    <div>共{{ total }}条</div>
+  <div class="ds-v-pagination d-flex align-center justify-center">
+    <div class="ds-v-pagination-total">共{{ total }}条</div>
 
-    <v-pagination
-      v-model="pageNo"
-      :length="pageCount"
-      v-bind="$attrs"
-      :total="total"
-      v-on="$listeners"
-    />
+    <div class="ds-v-pagination-step">
+      <v-pagination
+        v-model="pageNo"
+        :length="pageCount"
+        v-bind="$attrs"
+        :total="total"
+        v-on="$listeners"
+      />
+    </div>
 
-    <v-select
-      v-model="pageSize"
-      style="max-width: 100px"
-      dense
-      :items="sizeOptions"
-      item-text="label"
-      item-value="value"
-      outlined
-      hide-details
-      @change="handleChangeSizeSelect"
-    />
+    <div class="ds-v-pagination-jump d-flex align-center">
+      前往
+      <v-text-field
+        :key="count"
+        :value="pageNo"
+        outlined
+        dense
+        hide-details
+        @blur="handleJump"
+      />
+      页
+    </div>
+
+    <div class="ds-v-pagination-page">
+      <v-select
+        v-model="pageSize"
+        dense
+        :items="sizeOptions"
+        item-text="label"
+        item-value="value"
+        outlined
+        hide-details
+        attach
+        @change="handleChangeSizeSelect"
+      />
+    </div>
 
     <!-- <div>
       <v-select
@@ -41,7 +58,7 @@
 
 <script>
 export default {
-  name: 'UPagination',
+  name: 'DsVPagination',
 
   props: {
     /** 当前页码 */
@@ -73,6 +90,8 @@ export default {
     return {
       pageNo: this.value,
       pageSize: this.size,
+
+      count: 0,
     }
   },
 
@@ -143,6 +162,34 @@ export default {
     handleChangeSizeSelect(value) {
       this.pageSize = value
     },
+
+    handleJump(event) {
+      const newValue = +event.target.value.replace(/[^\d-]/g, '') || 0
+      this.pageNo = Math.min(
+        Math.max(1, newValue),
+        Math.ceil(this.total / this.pageSize)
+      )
+      this.count++
+    },
   },
 }
 </script>
+
+<style lang="scss">
+.ds-v-pagination {
+  &-step {
+    margin-left: 8px;
+  }
+  &-jump {
+    margin-left: 8px;
+    .v-input {
+      margin: 0 8px;
+      width: 60px;
+    }
+  }
+  &-page {
+    margin-left: 8px;
+    width: 100px;
+  }
+}
+</style>

@@ -1,11 +1,11 @@
-# `@uyu-vue/core`
+# `@dseven/vuetify`
 
 > TODO: description
 
 ## Usage
 
 ```
-const core = require('@uyu-vue/core');
+const core = require('@dseven/vuetify');
 
 // TODO: DEMONSTRATE API
 ```

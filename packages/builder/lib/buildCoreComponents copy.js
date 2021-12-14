@@ -30,7 +30,7 @@ function isDir(dir) {
 module.exports = async function buildCore() {
   const currentWorkingPath = process.cwd()
   let packages = {
-    'uyu-vue': path.join(currentWorkingPath, './lib/index.js'),
+    'dseven-vue': path.join(currentWorkingPath, './lib/index.js'),
   }
   const dir = path.join(currentWorkingPath, './lib/packages')
   const files = fs.readdirSync(dir)

@@ -1,32 +1,32 @@
 <template>
   <div ref="tableWrapper">
-    <v-data-table
-      :ref="tableRef"
-      hide-default-footer
-      fixed-header
-      v-bind="$attrs"
-      :loading="loading"
-      :items="dataSource"
-      :items-per-page="tableMaxNumber"
-      :height="tableHeight"
-      v-on="$listeners"
-    >
-      <slot v-for="name of slots[0]" :slot="name" :name="name"></slot>
-      <template v-for="name of slots[1]" #[name]="bindData">
-        <slot :name="name" v-bind="bindData" />
-      </template>
-    </v-data-table>
-
+    <div class="ds-v-table-wrapper">
+      <v-data-table
+        :ref="tableRef"
+        hide-default-footer
+        fixed-header
+        v-bind="$attrs"
+        :loading="loading"
+        :items="dataSource"
+        :items-per-page="tableMaxNumber"
+        :height="tableHeight"
+        v-on="$listeners"
+      >
+        <slot v-for="name of slots[0]" :slot="name" :name="name"></slot>
+        <template v-for="name of slots[1]" #[name]="bindData">
+          <slot :name="name" v-bind="bindData" />
+        </template>
+      </v-data-table>
+    </div>
     <div
-      v-if="!isScroll && showPagination && !!total"
-      class="flex-box middle mt-4"
+      v-if="!isScroll && !!total && showPagination"
+      class="ds-v-pagination-wrapper d-flex mt-4"
     >
-      <u-pagination
+      <ds-v-pagination
         v-model="currentPage"
         :total="total"
-        :total-visible="7"
         :size.sync="currentPageSize"
-        v-bind="paginationProps"
+        v-bind="newPaginationProps"
       />
     </div>
   </div>
@@ -35,12 +35,12 @@
 <script>
 import debounce from 'lodash.debounce'
 import throttle from 'lodash.throttle'
-import UPagination from './Pagination'
+import DsVPagination from './Pagination'
 
 export default {
-  name: 'UTable',
+  name: 'DsVTable',
   components: {
-    UPagination,
+    DsVPagination,
   },
 
   props: {
@@ -158,6 +158,13 @@ export default {
       return {
         pageNum: this.currentPage,
         pageSize: this.currentPageSize,
+      }
+    },
+
+    newPaginationProps() {
+      return {
+        totalVisible: 7,
+        ...this.paginationProps,
       }
     },
 

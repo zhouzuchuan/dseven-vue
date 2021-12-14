@@ -14,7 +14,7 @@ const { main, name } = require(path.join(currentWorkingPath, 'package.json'))
 
 const inputPath = path.join(currentWorkingPath, main)
 
-const fileName = name.replace('@uyu-vue/', '')
+const fileName = name.replace('@dseven/', '')
 
 let inputOptions = {}
 

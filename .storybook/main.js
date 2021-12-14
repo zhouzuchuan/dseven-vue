@@ -16,7 +16,7 @@ module.exports = {
       ...(config.resolve?.alias || {}),
       '~storybook': path.resolve(__dirname),
       '@': path.resolve(__dirname, '..'),
-      '@uyu-vue/core': path.resolve(__dirname, '../packages/core'),
+      '@dseven/vuetify': path.resolve(__dirname, '../packages/vuetify'),
     }
 
     config.module.rules.push({

@@ -14,7 +14,7 @@ addons.setConfig({
     inputTextColor: 'black',
     inputBorderRadius: 4,
 
-    brandTitle: 'UYU-VUE',
+    brandTitle: 'DSEVEN-VUE',
     // brandUrl: 'https://example.com',
     // brandImage: 'https://place-hold.it/350x150',
   }),
