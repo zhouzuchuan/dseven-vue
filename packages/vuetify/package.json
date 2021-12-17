@@ -1,6 +1,6 @@
 {
   "name": "@dseven/vuetify",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "基于 vuetify 开发的集成组件",
   "keywords": [
     "vuetify",
@@ -38,7 +38,7 @@
     "url": "https://github.com/zhouzuchuan/dseven-vue/issues"
   },
   "devDependencies": {
-    "@dseven/builder-vue": "^0.0.1",
+    "@dseven/builder-vue": "^0.1.0",
     "vue": "^2.6.14",
     "vuetify": "^2.5.8"
   },
