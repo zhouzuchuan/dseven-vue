@@ -1,8 +1,8 @@
 <template>
   <div class="ds-v-pagination d-flex align-center justify-center">
-    <div class="ds-v-pagination-total">共{{ total }}条</div>
+    <div class="ds-v-pagination_total">共{{ total }}条</div>
 
-    <div class="ds-v-pagination-step">
+    <div class="ds-v-pagination_step">
       <v-pagination
         v-model="pageNo"
         :length="pageCount"
@@ -12,7 +12,7 @@
       />
     </div>
 
-    <div class="ds-v-pagination-jump d-flex align-center">
+    <div class="ds-v-pagination_jump d-flex align-center">
       前往
       <v-text-field
         :key="count"
@@ -25,7 +25,7 @@
       页
     </div>
 
-    <div class="ds-v-pagination-page">
+    <div class="ds-v-pagination_page">
       <v-select
         v-model="pageSize"
         dense
@@ -177,17 +177,17 @@ export default {
 
 <style lang="scss">
 .ds-v-pagination {
-  &-step {
+  &_step {
     margin-left: 8px;
   }
-  &-jump {
+  &_jump {
     margin-left: 8px;
     .v-input {
       margin: 0 8px;
       width: 60px;
     }
   }
-  &-page {
+  &_page {
     margin-left: 8px;
     width: 100px;
   }
