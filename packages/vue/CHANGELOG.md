@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.3...@dseven/vue@0.1.4) (2021-12-20)
+
+
+### Bug Fixes
+
+* **vue集成组件:** requestWrapper 没有设置name ([388f83e](https://github.com/zhouzuchuan/dseven-vue/commit/388f83eddcffac051fe49385fa69d2cbfb042a7f))
+
+
+
+
+
 ## [0.1.3](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.2...@dseven/vue@0.1.3) (2021-12-20)
 
 
