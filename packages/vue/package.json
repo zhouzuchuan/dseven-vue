@@ -25,6 +25,7 @@
     "url": "git+https://github.com/zhouzuchuan/dseven-vue.git"
   },
   "scripts": {
+    "build": "builder",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
