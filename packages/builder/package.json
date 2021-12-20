@@ -7,16 +7,16 @@
   "author": "fezzc <zhouzuchuan@sina.com>",
   "homepage": "https://github.com/zhouzuchuan/dseven-vue/tree/main/packages/builder#readme",
   "license": "ISC",
-  "main": "lib/builder.js",
+  "main": "src/builder.js",
   "bin": {
-    "builder": "./lib/builder.js"
+    "builder": "./src/builder.js"
   },
   "directories": {
-    "lib": "lib",
+    "src": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "publishConfig": {
     "access": "public"
