@@ -38,7 +38,7 @@ function createRollupConfig(file, name) {
         },
       }),
       vuePlugins({
-        css: false,
+        css: true,
         compileTemplate: true,
       }),
       postcss(),

@@ -70,8 +70,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script$1 = {
-  name: 'UPagination',
+  name: 'DsVPagination',
   props: {
     /** 当前页码 */
     value: {
@@ -102,7 +119,8 @@ var script$1 = {
   data: function data() {
     return {
       pageNo: this.value,
-      pageSize: this.size
+      pageSize: this.size,
+      count: 0
     };
   },
   computed: {
@@ -173,6 +191,11 @@ var script$1 = {
   methods: {
     handleChangeSizeSelect: function handleChangeSizeSelect(value) {
       this.pageSize = value;
+    },
+    handleJump: function handleJump(event) {
+      var newValue = +event.target.value.replace(/[^\d-]/g, '') || 0;
+      this.pageNo = Math.min(Math.max(1, newValue), Math.ceil(this.total / this.pageSize));
+      this.count++;
     }
   }
 };
@@ -257,6 +280,61 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
 
   return script;
 }
+
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+function createInjector(context) {
+  return function (id, style) {
+    return addStyle(id, style);
+  };
+}
+
+var HEAD;
+var styles = {};
+
+function addStyle(id, css) {
+  var group = isOldIE ? css.media || 'default' : id;
+  var style = styles[group] || (styles[group] = {
+    ids: new Set(),
+    styles: []
+  });
+
+  if (!style.ids.has(id)) {
+    style.ids.add(id);
+    var code = css.source;
+
+    if (css.map) {
+      // https://developer.chrome.com/devtools/docs/javascript-debugging
+      // this makes source maps inside style tags work properly in Chrome
+      code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
+
+      code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
+    }
+
+    if (!style.element) {
+      style.element = document.createElement('style');
+      style.element.type = 'text/css';
+      if (css.media) style.element.setAttribute('media', css.media);
+
+      if (HEAD === undefined) {
+        HEAD = document.head || document.getElementsByTagName('head')[0];
+      }
+
+      HEAD.appendChild(style.element);
+    }
+
+    if ('styleSheet' in style.element) {
+      style.styles.push(code);
+      style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
+    } else {
+      var index = style.ids.size - 1;
+      var textNode = document.createTextNode(code);
+      var nodes = style.element.childNodes;
+      if (nodes[index]) style.element.removeChild(nodes[index]);
+      if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
+    }
+  }
+}
 /* script */
 
 
@@ -271,8 +349,12 @@ var __vue_render__$1 = function __vue_render__$1() {
   var _c = _vm._self._c || _h;
 
   return _c("div", {
-    staticClass: "d-flex align-center justify-center"
-  }, [_c("div", [_vm._v("共" + _vm._s(_vm.total) + "条")]), _vm._v(" "), _c("v-pagination", _vm._g(_vm._b({
+    staticClass: "ds-v-pagination d-flex align-center justify-center"
+  }, [_c("div", {
+    staticClass: "ds-v-pagination_total"
+  }, [_vm._v("共" + _vm._s(_vm.total) + "条")]), _vm._v(" "), _c("div", {
+    staticClass: "ds-v-pagination_step"
+  }, [_c("v-pagination", _vm._g(_vm._b({
     attrs: {
       length: _vm.pageCount,
       total: _vm.total
@@ -284,17 +366,30 @@ var __vue_render__$1 = function __vue_render__$1() {
       },
       expression: "pageNo"
     }
-  }, "v-pagination", _vm.$attrs, false), _vm.$listeners)), _vm._v(" "), _c("v-select", {
-    staticStyle: {
-      "max-width": "100px"
+  }, "v-pagination", _vm.$attrs, false), _vm.$listeners))], 1), _vm._v(" "), _c("div", {
+    staticClass: "ds-v-pagination_jump d-flex align-center"
+  }, [_vm._v("\n    前往\n    "), _c("v-text-field", {
+    key: _vm.count,
+    attrs: {
+      value: _vm.pageNo,
+      outlined: "",
+      dense: "",
+      "hide-details": ""
     },
+    on: {
+      blur: _vm.handleJump
+    }
+  }), _vm._v("\n    页\n  ")], 1), _vm._v(" "), _c("div", {
+    staticClass: "ds-v-pagination_page"
+  }, [_c("v-select", {
     attrs: {
       dense: "",
       items: _vm.sizeOptions,
       "item-text": "label",
       "item-value": "value",
       outlined: "",
-      "hide-details": ""
+      "hide-details": "",
+      attach: ""
     },
     on: {
       change: _vm.handleChangeSizeSelect
@@ -306,15 +401,30 @@ var __vue_render__$1 = function __vue_render__$1() {
       },
       expression: "pageSize"
     }
-  })], 1);
+  })], 1)]);
 };
 
 var __vue_staticRenderFns__$1 = [];
 __vue_render__$1._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$1 = undefined;
+var __vue_inject_styles__$1 = function __vue_inject_styles__$1(inject) {
+  if (!inject) return;
+  inject("data-v-481d3093_0", {
+    source: ".ds-v-pagination_step {\n  margin-left: 8px;\n}\n.ds-v-pagination_jump {\n  margin-left: 8px;\n}\n.ds-v-pagination_jump .v-input {\n  margin: 0 8px;\n  width: 60px;\n}\n.ds-v-pagination_page {\n  margin-left: 8px;\n  width: 100px;\n}\n\n/*# sourceMappingURL=Pagination.vue.map */",
+    map: {
+      "version": 3,
+      "sources": ["/Users/fezzc/openSource/dseven-vue/packages/vuetify/src/components/Table/Pagination.vue", "Pagination.vue"],
+      "names": [],
+      "mappings": "AAmLA;EACA,gBAAA;AClLA;ADoLA;EACA,gBAAA;AClLA;ADmLA;EACA,aAAA;EACA,WAAA;ACjLA;ADoLA;EACA,gBAAA;EACA,YAAA;AClLA;;AAEA,yCAAyC",
+      "file": "Pagination.vue",
+      "sourcesContent": ["<template>\n  <div class=\"ds-v-pagination d-flex align-center justify-center\">\n    <div class=\"ds-v-pagination_total\">共{{ total }}条</div>\n\n    <div class=\"ds-v-pagination_step\">\n      <v-pagination\n        v-model=\"pageNo\"\n        :length=\"pageCount\"\n        v-bind=\"$attrs\"\n        :total=\"total\"\n        v-on=\"$listeners\"\n      />\n    </div>\n\n    <div class=\"ds-v-pagination_jump d-flex align-center\">\n      前往\n      <v-text-field\n        :key=\"count\"\n        :value=\"pageNo\"\n        outlined\n        dense\n        hide-details\n        @blur=\"handleJump\"\n      />\n      页\n    </div>\n\n    <div class=\"ds-v-pagination_page\">\n      <v-select\n        v-model=\"pageSize\"\n        dense\n        :items=\"sizeOptions\"\n        item-text=\"label\"\n        item-value=\"value\"\n        outlined\n        hide-details\n        attach\n        @change=\"handleChangeSizeSelect\"\n      />\n    </div>\n\n    <!-- <div>\n      <v-select\n        v-model=\"pageSize\"\n        style=\"max-width: 100px\"\n        dense\n        :items=\"sizeOptions\"\n        item-text=\"label\"\n        item-value=\"value\"\n        outlined\n        hide-details\n        attach\n        @change=\"handleChangeSizeSelect\"\n      />\n    </div> -->\n  </div>\n</template>\n\n<script>\nexport default {\n  name: 'DsVPagination',\n\n  props: {\n    /** 当前页码 */\n    value: {\n      type: Number,\n      default: 1,\n    },\n\n    /** 页面展示的数量 支持 .sync 修饰符 **/\n    size: {\n      type: Number,\n      default: 20,\n    },\n\n    /** 每页显示数量 选择器的选项设置 **/\n    sizes: {\n      type: Array,\n      default: () => [10, 20, 30, 50, 100],\n    },\n\n    /** 总条目数 **/\n    total: {\n      type: Number,\n      default: 10,\n    },\n  },\n\n  data() {\n    return {\n      pageNo: this.value,\n      pageSize: this.size,\n\n      count: 0,\n    }\n  },\n\n  computed: {\n    pageCount() {\n      return Math.ceil(this.total / this.pageSize) || 1\n    },\n\n    sizeOptions() {\n      return this.sizes.map((v) => ({\n        label: `${v}`,\n        value: v,\n      }))\n    },\n  },\n\n  watch: {\n    value: {\n      immediate: true,\n      handler(nv) {\n        this.pageNo = nv\n      },\n    },\n    size: {\n      immediate: true,\n      handler(nv) {\n        this.pageSize = nv\n      },\n    },\n    pageNo(v) {\n      /**\n       * 被绑定模型的更新（页码）\n       * @type {Event}\n       */\n      this.$emit('input', v)\n      /**\n       * 修改当前页码 触发\n       * @type {Event}\n       */\n      this.$emit('page-change', v)\n    },\n    pageSize(v) {\n      /**\n       * 更新绑定的页面数量\n       * @type {Event}\n       */\n      this.$emit('update:size', v)\n      /**\n       * 需改页面数量 触发\n       * @type {Event}\n       */\n      this.$emit('size-change', v)\n\n      /**\n       * 被绑定模型的更新（页码）\n       * @type {Event}\n       */\n      this.$emit('input', 1)\n      /**\n       * 修改当前页码 触发\n       * @type {Event}\n       */\n      this.$emit('page-change', 1)\n    },\n  },\n\n  methods: {\n    handleChangeSizeSelect(value) {\n      this.pageSize = value\n    },\n\n    handleJump(event) {\n      const newValue = +event.target.value.replace(/[^\\d-]/g, '') || 0\n      this.pageNo = Math.min(\n        Math.max(1, newValue),\n        Math.ceil(this.total / this.pageSize)\n      )\n      this.count++\n    },\n  },\n}\n</script>\n\n<style lang=\"scss\">\n.ds-v-pagination {\n  &_step {\n    margin-left: 8px;\n  }\n  &_jump {\n    margin-left: 8px;\n    .v-input {\n      margin: 0 8px;\n      width: 60px;\n    }\n  }\n  &_page {\n    margin-left: 8px;\n    width: 100px;\n  }\n}\n</style>\n", ".ds-v-pagination_step {\n  margin-left: 8px;\n}\n.ds-v-pagination_jump {\n  margin-left: 8px;\n}\n.ds-v-pagination_jump .v-input {\n  margin: 0 8px;\n  width: 60px;\n}\n.ds-v-pagination_page {\n  margin-left: 8px;\n  width: 100px;\n}\n\n/*# sourceMappingURL=Pagination.vue.map */"]
+    },
+    media: undefined
+  });
+};
 /* scoped */
+
 
 var __vue_scope_id__$1 = undefined;
 /* module identifier */
@@ -323,8 +433,6 @@ var __vue_module_identifier__$1 = undefined;
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
-/* style inject */
-
 /* style inject SSR */
 
 /* style inject shadow dom */
@@ -332,13 +440,13 @@ var __vue_is_functional_template__$1 = false;
 var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$1,
   staticRenderFns: __vue_staticRenderFns__$1
-}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined); //
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined); //
 
 
 var script = {
-  name: 'UTable',
+  name: 'DsVTable',
   components: {
-    UPagination: __vue_component__$1
+    DsVPagination: __vue_component__$1
   },
   props: {
     /**
@@ -452,6 +560,11 @@ var script = {
         pageNum: this.currentPage,
         pageSize: this.currentPageSize
       };
+    },
+    newPaginationProps: function newPaginationProps() {
+      return _objectSpread({
+        totalVisible: 7
+      }, this.paginationProps);
     },
     // 是否是远程
     isRemote: function isRemote() {
@@ -637,42 +750,6 @@ var script = {
     }
   }
 };
-
-function styleInject(css, ref) {
-  if (ref === void 0) ref = {};
-  var insertAt = ref.insertAt;
-
-  if (!css || typeof document === 'undefined') {
-    return;
-  }
-
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var css_248z$2 = "";
-styleInject(css_248z$2);
-var css_248z$1 = "";
-styleInject(css_248z$1);
-var css_248z = "";
-styleInject(css_248z);
 /* script */
 
 var __vue_script__ = script;
@@ -687,6 +764,8 @@ var __vue_render__ = function __vue_render__() {
 
   return _c("div", {
     ref: "tableWrapper"
+  }, [_c("div", {
+    staticClass: "ds-v-table-wrapper"
   }, [_c("v-data-table", _vm._g(_vm._b({
     ref: _vm.tableRef,
     attrs: {
@@ -709,12 +788,11 @@ var __vue_render__ = function __vue_render__() {
     return _vm._t(name, null, {
       slot: name
     });
-  })], 2), _vm._v(" "), !_vm.isScroll && _vm.showPagination && !!_vm.total ? _c("div", {
-    staticClass: "flex-box middle mt-4"
-  }, [_c("u-pagination", _vm._b({
+  })], 2)], 1), _vm._v(" "), !_vm.isScroll && !!_vm.total && _vm.showPagination ? _c("div", {
+    staticClass: "ds-v-pagination-wrapper d-flex mt-4"
+  }, [_c("ds-v-pagination", _vm._b({
     attrs: {
       total: _vm.total,
-      "total-visible": 7,
       size: _vm.currentPageSize
     },
     on: {
@@ -729,7 +807,7 @@ var __vue_render__ = function __vue_render__() {
       },
       expression: "currentPage"
     }
-  }, "u-pagination", _vm.paginationProps, false))], 1) : _vm._e()], 1);
+  }, "ds-v-pagination", _vm.newPaginationProps, false))], 1) : _vm._e()]);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -739,7 +817,7 @@ __vue_render__._withStripped = true;
 var __vue_inject_styles__ = undefined;
 /* scoped */
 
-var __vue_scope_id__ = "data-v-1295a9c8";
+var __vue_scope_id__ = undefined;
 /* module identifier */
 
 var __vue_module_identifier__ = undefined;
