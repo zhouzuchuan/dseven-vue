@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.1...@dseven/vue@0.1.2) (2021-12-20)
+
+
+### Features
+
+* **vue集成组件:** 应用 ([cc6ad3d](https://github.com/zhouzuchuan/dseven-vue/commit/cc6ad3d94a0feb7d83be9ab7e0a331fbac309c2b))
+
+
+
+
+
 ## [0.1.1](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.0...@dseven/vue@0.1.1) (2021-12-20)
 
 
