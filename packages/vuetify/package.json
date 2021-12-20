@@ -1,6 +1,6 @@
 {
   "name": "@dseven/vuetify",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "基于 vuetify 开发的集成组件",
   "keywords": [
     "vuetify",

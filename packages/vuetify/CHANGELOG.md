@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vuetify@0.1.1...@dseven/vuetify@0.1.2) (2021-12-20)
+
+
+### Features
+
+* **global:** 修改分页组件布局 ([dd6cd45](https://github.com/zhouzuchuan/dseven-vue/commit/dd6cd454f2f70b92f66f430c7512f68ab1616ea9))
+
+
+
+
+
 ## [0.1.1](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vuetify@0.1.0...@dseven/vuetify@0.1.1) (2021-12-20)
 
 
