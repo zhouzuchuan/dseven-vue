@@ -34,7 +34,12 @@ module.exports = {
     },
   ],
 
-  scopes: [{ name: 'global' }, { name: 'cli' }],
+  scopes: [
+    { name: 'global' },
+    { name: 'cli' },
+    { name: 'vue集成组件' },
+    { name: 'vuetify集成组件' },
+  ],
 
   messages: {
     type: '选择提交类型:',
