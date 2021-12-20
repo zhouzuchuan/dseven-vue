@@ -32,7 +32,7 @@ function createRollupConfig(file, name) {
         output(style) {
           // 压缩 css 写入 dist/vue-rollup-component-template.css
           fs.writeFileSync(
-            `lib/styles/${componentName}.css`,
+            `dist/styles/${componentName}.css`,
             new CleanCSS().minify(style).styles
           )
         },
@@ -48,7 +48,9 @@ function createRollupConfig(file, name) {
   return config
 }
 
-const defaultOutputConfig = [{ tempDir: tempDirName, dir: 'lib', format: 'es' }]
+const defaultOutputConfig = [
+  { tempDir: tempDirName, dir: 'dist', format: 'es' },
+]
 
 async function runQueue(data) {
   for (let fn of data) {
@@ -56,11 +58,11 @@ async function runQueue(data) {
   }
 }
 
-shell.rm('-rf', 'es5', 'lib', tempDirName)
+shell.rm('-rf', 'es5', 'dist', tempDirName)
 shell.exec(
-  `yarn run cross-env NODE_ENV=lib babel src  --out-dir lib  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
+  `yarn run cross-env NODE_ENV=lib babel src  --out-dir dist  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
 )
-shell.mkdir('-p', 'lib/styles')
+shell.mkdir('-p', 'dist/styles')
 
 const dir = path.join(currentWorkingPath, './src/components')
 
@@ -103,7 +105,7 @@ if (isDir(dir)) {
     }, [])
   ).then(() => {
     shell.exec(
-      `yarn run cross-env NODE_ENV=lib babel ${tempDirName}  --out-dir lib  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
+      `yarn run cross-env NODE_ENV=lib babel ${tempDirName}  --out-dir dist  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
     )
     shell.rm('-rf', tempDirName)
   })

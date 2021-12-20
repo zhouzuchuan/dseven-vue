@@ -11,10 +11,12 @@
   "license": "MIT",
   "main": "lib/index.js",
   "directories": {
+    "dist": "dist",
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
+    "dist",
     "lib"
   ],
   "publishConfig": {
@@ -25,10 +27,12 @@
     "url": "git+https://github.com/zhouzuchuan/dseven-vue.git"
   },
   "scripts": {
-    "build": "builder",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/zhouzuchuan/dseven-vue/issues"
+  },
+  "devDependencies": {
+    "@dseven/builder-vue": "^0.1.1"
   }
 }

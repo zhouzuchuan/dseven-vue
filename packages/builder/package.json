@@ -1,22 +1,22 @@
 {
   "name": "@dseven/builder-vue",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "private": true,
   "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
   "keywords": [],
   "author": "fezzc <zhouzuchuan@sina.com>",
   "homepage": "https://github.com/zhouzuchuan/dseven-vue/tree/main/packages/builder#readme",
   "license": "ISC",
-  "main": "src/builder.js",
+  "main": "lib/builder.js",
   "bin": {
-    "builder": "./src/builder.js"
+    "builder": "./lib/builder.js"
   },
   "directories": {
-    "src": "src",
+    "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "src"
+    "lib"
   ],
   "publishConfig": {
     "access": "public"

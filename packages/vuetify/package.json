@@ -11,14 +11,16 @@
   "author": "fezzc <zhouzuchuan@sina.com>",
   "homepage": "https://github.com/zhouzuchuan/dseven-vue/tree/main/packages/core#readme",
   "license": "ISC",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "directories": {
+    "dist": "dist",
     "lib": "lib",
     "src": "src",
     "es5": "es5",
     "test": "__tests__"
   },
   "files": [
+    "dist",
     "lib",
     "src",
     "es5"
@@ -38,6 +40,7 @@
     "url": "https://github.com/zhouzuchuan/dseven-vue/issues"
   },
   "devDependencies": {
+    "@dseven/builder-vue": "^0.1.1",
     "vue": "^2.6.14",
     "vuetify": "^2.5.8"
   },

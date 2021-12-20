@@ -3,6 +3,6 @@ storybook-static
 npm-debug.log* 
 lerna-debug.log*
 
-packages/**/lib/**/*
+packages/**/dist/**/*
 
 .DS_Store
