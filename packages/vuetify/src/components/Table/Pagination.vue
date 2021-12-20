@@ -1,6 +1,10 @@
 <template>
   <div class="ds-v-pagination d-flex align-center justify-center">
-    <div class="ds-v-pagination_total">共{{ total }}条</div>
+    <div class="ds-v-pagination_total">
+      共
+      <span>{{ total }}</span>
+      条
+    </div>
 
     <div class="ds-v-pagination_step">
       <v-pagination
@@ -34,7 +38,6 @@
         item-value="value"
         outlined
         hide-details
-        attach
         @change="handleChangeSizeSelect"
       />
     </div>
