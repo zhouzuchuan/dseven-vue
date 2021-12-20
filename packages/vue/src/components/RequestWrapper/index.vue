@@ -11,6 +11,7 @@
 <script>
 import DsLoadingWrapper from '../LoadingWrapper'
 export default {
+  name: 'DsRequestWrapper',
   components: { DsLoadingWrapper },
   props: {
     /**
