@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.0...@dseven/vue@0.1.1) (2021-12-20)
+
+
+### Features
+
+* **global:** 调整 ([3f73a2a](https://github.com/zhouzuchuan/dseven-vue/commit/3f73a2a488a9af7151cbc5adb843d49ad7a54a3b))
+* **global:** 调整 ([8986b38](https://github.com/zhouzuchuan/dseven-vue/commit/8986b38d35d1dde177cc1da1a60436652d3c28e9))
+
+
+
+
+
 # 0.1.0 (2021-12-17)
 
 

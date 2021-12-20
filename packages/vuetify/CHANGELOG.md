@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vuetify@0.1.2...@dseven/vuetify@0.1.3) (2021-12-20)
+
+
+### Features
+
+* **global:** 调整 ([3f73a2a](https://github.com/zhouzuchuan/dseven-vue/commit/3f73a2a488a9af7151cbc5adb843d49ad7a54a3b))
+* **global:** 调整 ([8986b38](https://github.com/zhouzuchuan/dseven-vue/commit/8986b38d35d1dde177cc1da1a60436652d3c28e9))
+* **global:** 调整依赖 ([831491d](https://github.com/zhouzuchuan/dseven-vue/commit/831491d3a05278a2a40691ad555080c31ba058ff))
+
+
+
+
+
 ## [0.1.2](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vuetify@0.1.1...@dseven/vuetify@0.1.2) (2021-12-20)
 
 
