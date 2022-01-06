@@ -1,7 +1,7 @@
 import LoadingWrapper from './components/LoadingWrapper'
-import RequestWrapper from './components/RequestWrapper'
+import RequestLoading from './components/RequestLoading'
 
-const components = [LoadingWrapper, RequestWrapper]
+const components = [LoadingWrapper, RequestLoading]
 
 const install = function (Vue, opts = {}) {
   components.forEach((component) => {
@@ -16,5 +16,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   LoadingWrapper,
-  RequestWrapper,
+  RequestLoading,
 }

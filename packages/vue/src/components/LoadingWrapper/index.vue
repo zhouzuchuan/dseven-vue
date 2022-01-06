@@ -1,14 +1,15 @@
 <template>
   <div
     class="ds-loading-wrapper"
-    :style="{ minHeight: height + (typeof height === 'number' ? 'px' : '') }"
+    :style="{
+      minHeight: height + (typeof height === 'number' ? 'px' : ''),
+      '--ds-loading-mask-color': backgroundColor,
+    }"
   >
-    <div v-if="loading" class="ds-loading-wrapper_loading">
-      <div>
-        <slot name="loading">{{ loadingText }}</slot>
-      </div>
+    <div v-if="loading" class="ds-loading-wrapper_state">
+      <slot name="loading">{{ loadingText }}</slot>
     </div>
-    <template v-if="type === 'mask'">
+    <template v-if="mask">
       <slot />
     </template>
     <template v-else>
@@ -33,7 +34,7 @@ export default {
      * */
     loadingText: {
       type: String,
-      default: '加载中',
+      default: 'loading...',
     },
     /**
      * 高度
@@ -42,14 +43,21 @@ export default {
       type: [String, Number],
       default: 'auto',
     },
+
     /**
-     * 展示类型
+     * mask 为 true 才生效 默认为 '#fff'
      * */
-    type: {
-      validator(c) {
-        return ['mask', 'cover'].includes(c)
-      },
-      default: 'mask',
+    backgroundColor: {
+      type: String,
+      default: '#fff',
+    },
+
+    /**
+     *  是否是展示遮罩 默认为 true
+     * */
+    mask: {
+      type: Boolean,
+      default: true,
     },
   },
 }
@@ -58,14 +66,20 @@ export default {
 <style lang="scss" scoped>
 .ds-loading-wrapper {
   position: relative;
+  z-index: 0;
 
-  &_loading {
+  --ds-loading-mask-color: #fff;
+
+  &_state {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &::after {
       position: absolute;
@@ -74,18 +88,9 @@ export default {
       bottom: 0;
       left: 0;
       content: '';
-      background: rgba(255, 255, 255, 0.9);
-    }
-    & > :first-child {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 1;
-      min-width: 100px;
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-      transform: translate(-50%, -50%);
+      background: var(--ds-loading-mask-color);
+      opacity: 0.8;
+      z-index: -1;
     }
   }
 }

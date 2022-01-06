@@ -1,0 +1,58 @@
+import { Meta, Canvas, Story, Preview, ArgsTable } from '@storybook/addon-docs'
+import { storyFactory } from '~storybook/util/helpers'
+import DocsStyle from '~storybook/util/DocsStyle.mdx'
+import DsRequestLoading from './index.vue'
+
+<DocsStyle />
+
+<Meta
+  title="集成组件/RequestLoading（请求加载组件）"
+  component={DsRequestLoading}
+/>
+
+## 介绍
+
+通过该组件可以简化渲染请求获取的数据
+
+## 基本使用
+
+<Preview>
+  <Story name="基本使用">
+    {{
+      components: { DsRequestLoading },
+      template: `
+        <div> 
+            <button @click="hanldeSend">发送请求</button>
+            <ds-request-loading :serveRequest="proxyRequest" :requestParams="requestParams">
+                <template #default="{loading, requestResult}">  
+                    <span v-if="loading">loading...</span>
+                    <div v-else>{{requestResult}}</div>
+                </template>
+            </ds-request-loading>
+        </div>
+    `,
+      data() {
+        return {
+          requestParams: {
+            datatime: Date.now(),
+          },
+        }
+      },
+      methods: {
+        hanldeSend() {
+          this.requestParams = {
+            datatime: Date.now(),
+          }
+        },
+        async proxyRequest(params) {
+          await new Promise((resolve) => {
+            setTimeout(resolve, 3000)
+          })
+          return '请求参数是： ' + JSON.stringify(params)
+        },
+      },
+    }}
+  </Story>
+</Preview>
+
+<ArgsTable of={DsRequestLoading} />

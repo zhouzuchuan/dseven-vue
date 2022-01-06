@@ -12,7 +12,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages",
+    "release": "npm run build && lerna version patch",
+    "publish": "npm run release && lerna publish from-package"
   },
   "repository": {
     "type": "git",
