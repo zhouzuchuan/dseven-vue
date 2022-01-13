@@ -1,12 +1,18 @@
-import LoadingWrapper from './components/LoadingWrapper'
-import RequestLoading from './components/RequestLoading'
-
-const components = [LoadingWrapper, RequestLoading]
+import * as components from './components'
 
 const install = function (Vue, opts = {}) {
-  components.forEach((component) => {
-    Vue.component(component.name, component)
-  })
+  ;(function registerComponents(components: any) {
+    if (components) {
+      for (const key in components) {
+        const component = components[key]
+        if (component && !registerComponents(component.$_ds_subcomponents)) {
+          Vue.component(key, component)
+        }
+      }
+      return true
+    }
+    return false
+  })(components)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -15,6 +21,4 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  LoadingWrapper,
-  RequestLoading,
 }

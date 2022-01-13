@@ -39,15 +39,20 @@ export default {
     },
 
     /**
+     * 请求函数返回数据的 承载字段
+     *
+     * */
+    dataField: {
+      type: String,
+      default: 'data',
+    },
+
+    /**
      * 默认data数据
      * */
     defaultData: {
-      validator() {
-        return true
-      },
-      default() {
-        return ''
-      },
+      validator: () => true,
+      default: '',
     },
 
     /**
@@ -56,15 +61,6 @@ export default {
     defaultLoading: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * 请求函数返回数据的 承载字段 默认 'requestResult'
-     *
-     * */
-    dataField: {
-      type: String,
-      default: 'requestResult',
     },
   },
 

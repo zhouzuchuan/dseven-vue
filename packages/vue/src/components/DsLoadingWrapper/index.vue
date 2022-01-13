@@ -29,6 +29,7 @@ export default {
       type: Boolean,
       default: false,
     },
+
     /**
      * 加载提示文字
      * */
@@ -36,6 +37,7 @@ export default {
       type: String,
       default: 'loading...',
     },
+
     /**
      * 高度
      * */
