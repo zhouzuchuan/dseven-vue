@@ -1,10 +1,15 @@
 <template>
   <div v-bind="$attrs">
-    <slot
-      :onRequest="handleRemoteRequeset"
-      :loading="loading"
-      :[dataField]="data"
-    />
+    <!--  
+      @slot  默认vue插槽
+
+       {
+        onRequest: () => Promise<any>;
+        loading: Boolean;
+        [dataField]: any;
+      } 
+     -->
+    <slot :onRequest="onRequest" :loading="loading" :[dataField]="data" />
   </div>
 </template>
 
@@ -52,7 +57,7 @@ export default {
      * */
     defaultData: {
       validator: () => true,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -74,18 +79,18 @@ export default {
   watch: {
     requestParams: {
       deep: true,
-      handler: 'handleRemoteRequeset',
+      handler: 'onRequest',
     },
   },
 
   created() {
     if (this.immediate) {
-      this.handleRemoteRequeset()
+      this.onRequest()
     }
   },
 
   methods: {
-    handleRemoteRequeset() {
+    onRequest() {
       this.loading = true
       const requestFn = this.serveRequest?.(this.requestParams)
       if (typeof requestFn?.then === 'function') {
