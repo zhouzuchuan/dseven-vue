@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.5...@dseven/vue@0.2.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* **vue集成组件:** build error ([6981f55](https://github.com/zhouzuchuan/dseven-vue/commit/6981f55a048500836c5535765fb9df92454d36a8))
+
+
+### Features
+
+* **global:** 调整 ([410eeed](https://github.com/zhouzuchuan/dseven-vue/commit/410eeedacb4cc50bcb4b7ce568d9c35d275e9dd7))
+* **global:** 调整 ([6b24361](https://github.com/zhouzuchuan/dseven-vue/commit/6b24361551f7d059162b9d8e6901cb44fe86000a))
+* **vue集成组件:** 新增requestLoading 组件 ([24e45ce](https://github.com/zhouzuchuan/dseven-vue/commit/24e45ceebde0b22ce2ec6ba06a3be088f4434fe3))
+
+
+
+
+
 ## [0.1.5](https://github.com/zhouzuchuan/dseven-vue/compare/@dseven/vue@0.1.4...@dseven/vue@0.1.5) (2021-12-20)
 
 
