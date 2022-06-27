@@ -1,7 +1,7 @@
 import * as components from './components'
 
 const install = function (Vue, opts = {}) {
-  ;(function registerComponents(components: any) {
+  ;(function registerComponents(components) {
     if (components) {
       for (const key in components) {
         const component = components[key]
